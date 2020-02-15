@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<robot name="staubli_support" xmlns:xacro="http://ros.org/wiki/xacro">
+
+<xacro:macro name="box_inertial" params="m x y z rpy">
+  <inertial>
+    <origin xyz="0 ${y/2} 0" rpy="${rpy}" />
+    <mass value="${m}"/>
+    <inertia ixx="${1/12 * m * (y**2 + z**2)}" iyy="${1/12 * m * (x**2 + z**2)}" izz="${1/12 * m * (x**2 + y**2)}" ixy="0" ixz="0" iyz="0"/>
+  </inertial>
+</xacro:macro>
+
+<xacro:macro name="staubli_robot" params="prefix">
+  <link name="${prefix}base_link">
+    <inertial>
+      <origin
+        xyz="-0.036094 -0.0011916 0.08178"
+        rpy="0 0 0" />
+      <mass
+        value="7.5748" />
+      <inertia
+        ixx="0.029538"
+        ixy="-8.9612E-05"
+        ixz="0.00038729"
+        iyy="0.027722"
+        iyz="9.1466E-06"
+        izz="0.022274" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://staubli_support/meshes/robot/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.25098 0.25098 0.25098 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://staubli_support/meshes/robot/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="${prefix}link1">
+    <inertial>
+      <origin
+        xyz="-0.00023609 0.023183 0.32254"
+        rpy="0 0 0" />
+      <mass
+        value="7.2296" />
+      <inertia
+        ixx="0.059563"
+        ixy="-3.8764E-05"
+        ixz="-0.00017842"
+        iyy="0.050679"
+        iyz="-0.010038"
+        izz="0.03708" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://staubli_support/meshes/robot/link1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 0.64706 0.058824 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://staubli_support/meshes/robot/link1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="${prefix}joint1" type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="${prefix}base_link" />
+    <child
+      link="${prefix}link1" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.141" 
+      upper="3.141"
+      effort="1"
+      velocity="1" />
+  </joint>
+  <link name="${prefix}link2">
+    <inertial>
+      <origin
+        xyz="0.0017645 -0.12741 0.16923"
+        rpy="0 0 0" />
+      <mass
+        value="4.1314" />
+      <inertia
+        ixx="0.063291"
+        ixy="0.00024372"
+        ixz="2.1522E-05"
+        iyy="0.0084987"
+        iyz="-0.0015532"
+        izz="0.068276" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://staubli_support/meshes/robot/link2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 0.64706 0.058824 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://staubli_support/meshes/robot/link2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="${prefix}joint2" type="revolute">
+    <origin
+      xyz="0 0 0.375"
+      rpy="-1.5708 0 0" />
+    <parent
+      link="${prefix}link1" />
+    <child
+      link="${prefix}link2" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-2.225" 
+      upper="2.225"
+      effort="1"
+      velocity="1" />
+  </joint>
+  <link name="${prefix}link3">
+    <inertial>
+      <origin
+        xyz="-0.0038838 0.0079486 0.019209"
+        rpy="0 0 0" />
+      <mass
+        value="4.7835" />
+      <inertia
+        ixx="0.029621"
+        ixy="0.00014958"
+        ixz="-0.00068514"
+        iyy="0.01953"
+        iyz="-0.00061217"
+        izz="0.022392" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://staubli_support/meshes/robot/link3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 0.64706 0.058824 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://staubli_support/meshes/robot/link3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="${prefix}joint3" type="revolute">
+    <origin
+      xyz="0 -0.29 0.02"
+      rpy="0 0 0" />
+    <parent
+      link="${prefix}link2" />
+    <child
+      link="${prefix}link3" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-2.487" 
+      upper="2.487"
+      effort="1"
+      velocity="1" />
+  </joint>
+  <link name="${prefix}link4">
+    <inertial>
+      <origin
+        xyz="-0.0028815 6.4563E-07 0.21427"
+        rpy="0 0 0" />
+      <mass
+        value="2.2867" />
+      <inertia
+        ixx="0.0056823"
+        ixy="2.4543E-08"
+        ixz="-0.00022643"
+        iyy="0.004438"
+        iyz="-7.2146E-07"
+        izz="0.0043223" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://staubli_support/meshes/robot/link4.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://staubli_support/meshes/robot/link4.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="${prefix}joint4" type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="1.5708 0 0" />
+    <parent
+      link="${prefix}link3" />
+    <child
+      link="${prefix}link4" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-4.712" 
+      upper="4.712"
+      effort="1"
+      velocity="1" />
+  </joint>
+  <link name="${prefix}link5">
+    <inertial>
+      <origin
+        xyz="0.00019051 -0.015249 8.859E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.11472" />
+      <inertia
+        ixx="8.4067E-05"
+        ixy="-3.5681E-07"
+        ixz="2.7456E-11"
+        iyy="2.9426E-05"
+        iyz="4.0677E-09"
+        izz="9.5322E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://staubli_support/meshes/robot/link5.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.25098 0.25098 0.25098 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://staubli_support/meshes/robot/link5.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="${prefix}joint5" type="revolute">
+    <origin
+      xyz="0 0 0.31"
+      rpy="-1.5708 0 0" />
+    <parent
+      link="${prefix}link4" />
+    <child
+      link="${prefix}link5" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-2.138" 
+      upper="2.312"
+      effort="1"
+      velocity="1" />
+  </joint>
+  <link name="${prefix}link6">
+    <inertial>
+      <origin
+        xyz="-0.00019715 3.4694E-18 -0.0066379"
+        rpy="0 0 0" />
+      <mass
+        value="0.0088463" />
+      <inertia
+        ixx="1.0446E-06"
+        ixy="-1.6907E-22"
+        ixz="6.6235E-09"
+        iyy="1.0168E-06"
+        iyz="8.0812E-23"
+        izz="1.5808E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://staubli_support/meshes/robot/link6.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.66667 0.66667 0.66667 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://staubli_support/meshes/robot/link6.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="${prefix}joint6" type="revolute">
+    <origin
+      xyz="0 -0.068037 0"
+      rpy="1.5708 0 0" />
+    <parent
+      link="${prefix}link5" />
+    <child
+      link="${prefix}link6" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-4.712" 
+      upper="4.712"
+      effort="1"
+      velocity="1" />
+  </joint>
+</xacro:macro>
+</robot>

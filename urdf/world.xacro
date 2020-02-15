@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<robot name="room" xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <!-- ARGs -->
+    <xacro:arg name="isShowCrown" default="true" />
+    <xacro:arg name="isShowHDI" default="true" />
+
+    <!-- PROPERTY -->
+    <xacro:property name="robot1_prefix" value="robot1_"/>
+
+    <!-- INCLUDES -->
+    <xacro:include filename="$(find staubli_support)/urdf/robot/staubli_robot.xacro"/>
+    <xacro:include filename="$(find staubli_support)/urdf/workcell/workcell.xacro"/>
+
+
+    <!-- WORLD -->
+    <link name="world" />
+
+    <!-- ======== Components ========= -->
+
+    <!-- ROBOT INIT -->
+    <xacro:staubli_robot prefix="${robot1_prefix}"/>
+    <xacro:workcell isShowCrown="$(arg isShowCrown)" isShowHDI="$(arg isShowHDI)"/>
+
+    <!-- Connect Table -->
+    <joint name="world_table_joint" type="fixed">
+      <origin
+        xyz="0 0 0.9"
+        rpy="0 0 0" />
+      <parent
+        link="world" />
+      <child
+        link="table" />
+    </joint>
+
+    <!-- Connect Robot 1 -->
+    <joint name="table_${robot1_prefix}base_link_joint" type="fixed">
+      <origin
+        xyz="-0.4 0.3 0"
+        rpy="0 0 0" />
+      <parent
+        link="table" />
+      <child
+        link="${robot1_prefix}base_link" />
+    </joint>
+
+
+
+</robot>

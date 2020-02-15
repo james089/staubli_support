@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+
+<launch>
+    <arg name="use_rviz" default="true" />
+    <arg name="is_show_crown" default="false" />
+    <arg name="is_show_hdi" default="true" />
+    <param name="robot_description" command="$(find xacro)/xacro '$(find staubli_support)/urdf/world.xacro'
+    isShowCrown:=$(arg is_show_crown) isShowHDI:=$(arg is_show_hdi)" />
+
+    <node if="$(arg use_rviz)" name="rviz" pkg="rviz" type="rviz" args="-d $(find staubli_support)/rviz/display.rviz"/>
+    <node
+        name="joint_state_publisher"
+        pkg="joint_state_publisher"
+        type="joint_state_publisher" />
+
+    <!-- this is required to see tf -->
+    <node
+        name="robot_state_publisher"
+        pkg="robot_state_publisher"
+        type="robot_state_publisher" />
+</launch>
